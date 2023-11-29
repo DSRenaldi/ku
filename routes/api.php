@@ -22,9 +22,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::post('/read-image', function (Request $request) {
 //     return OCR->readImage($request);
 // });
-Route::post('/read-image', [OCRController::class,"readImage"]);
-
-
-Route::get('/', function (Request $request) {
-    return "Api Hello-Caleg!";
-});
