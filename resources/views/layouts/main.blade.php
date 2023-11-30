@@ -14,7 +14,7 @@
     <!-- <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.jpeg') }}"> -->
     @vite('resources/css/app.css')
     @stack('style')
-    <title>Polling Surabaya</title>
+    <title>Survey Sains Data Terapan</title>
 </head>
 
 <body>
