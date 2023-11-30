@@ -1,12 +1,17 @@
 @extends('layouts.main')
 
 @section('content')
-
-
-    <h1 id="info" class="flex flex-row justify-center text-[35px] mt-[10px]">Data Diri Responden</h1>
-    @if (session('succes'))
-        <div>Berhasiil Survey</div>
+    @if (session('success'))
+        <div class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800" role="alert">
+            <span class="font-medium">{{ session('success') }}!</span>
+        </div>
     @endif
+    @if (session('error'))
+        <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800" role="alert">
+            <span class="font-medium">{{ session('error') }}!</span>
+        s</div>
+    @endif
+    <h1 id="info" class="flex flex-row justify-center text-[35px] mt-[10px]">Data Diri Responden</h1>
     <div>
         <form action="{{route('post')}}" method="POST" >
             <!-- biodata -->
@@ -30,7 +35,7 @@
                             </th>
                             <td class="px-6 py-4">
                                 <fieldset>
-                                    <input type="email" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="email" id="email" />
+                                    <input type="email" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="email" id="email" required />
                                 </fieldset>
                             </div>
                             </td>
@@ -42,14 +47,14 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                     <div class="flex items-center mb-4">
-                                        <input id="laki_laki" type="radio" name="jenis_kelamin" value="0" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300" checked>
+                                        <input id="laki_laki" type="radio" required name="jenis_kelamin" value="0" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300" checked>
                                         <label for="laki_laki" class="block ms-2  text-sm font-medium text-slate-950">
                                             Laki-Laki
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="perempuan" type="radio" name="jenis_kelamin" value="1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                        <input id="perempuan" type="radio" required name="jenis_kelamin" value="1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                         <label for="perempuan" class="block ms-2 text-sm font-medium text-slate-950">
                                             Perempuan
                                         </label>
@@ -214,28 +219,28 @@
                                 <fieldset>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="0" type="checkbox" name="pertanyaan-1" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="0" type="checkbox" name="pertanyaan_1[]" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="0" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Karakter Lulusan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="1" type="checkbox" name="pertanyaan-1" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="1" type="checkbox" name="pertanyaan_1[]" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Kompetensi Lulusan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="2" type="checkbox" name="pertanyaan-1" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="2" type="checkbox" name="pertanyaan_1[]" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Kreativitas/Produk Inovasi
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="3" type="checkbox" name="pertanyaan-1" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="3" type="checkbox" name="pertanyaan_1[]" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Prestasi Lulusan
                                         </label>
@@ -250,42 +255,42 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                     <div class="flex items-center mb-4">
-                                        <input id="0" type="checkbox" name="pertanyaan-2" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="0" type="checkbox" name="pertanyaan_2[]" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="0" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Kurikulum cenderung berubah
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="1" type="checkbox" name="pertanyaan-2" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="1" type="checkbox" name="pertanyaan_2[]" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Akses pendidikan belum merata
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="2" type="checkbox" name="pertanyaan-2" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="2" type="checkbox" name="pertanyaan_2[]" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Pendidikan karakter kurang
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="3" type="checkbox" name="pertanyaan-2" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="3" type="checkbox" name="pertanyaan_2[]" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Anggaran pendidikan belum sesuai/belum<br>mencukupi
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="4" type="checkbox" name="pertanyaan-2" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="4" type="checkbox" name="pertanyaan_2[]" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="4" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Gaji guru/dosen belum layak
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="5" type="checkbox" name="pertanyaan-2" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="5" type="checkbox" name="pertanyaan_2[]" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="5" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Banyak tugas administratif untuk guru/dosen
                                         </label>
@@ -301,28 +306,28 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                     <div class="flex items-center mb-4">
-                                        <input id="0" type="radio" name="pertanyaan-3" value="0" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300" checked>
+                                        <input id="0" type="radio" name="pertanyaan_3[]" value="0" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300" checked>
                                         <label for="0" class="block ms-2  text-sm font-medium text-slate-950">
                                             Sangat tidak puas
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="1" type="radio" name="pertanyaan-3" value="1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                        <input id="1" type="radio" name="pertanyaan_3[]" value="1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                         <label for="1" class="block ms-2 text-sm font-medium text-slate-950">
                                             Tidak puas
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="2" type="radio" name="pertanyaan-3" value="2" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                        <input id="2" type="radio" name="pertanyaan_3[]" value="2" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                         <label for="2" class="block ms-2 text-sm font-medium text-slate-950">
                                             Puas
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="3" type="radio" name="pertanyaan-3" value="3" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                        <input id="3" type="radio" name="pertanyaan_3[]" value="3" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                         <label for="3" class="block ms-2 text-sm font-medium text-slate-950">
                                             Sangat puas
                                         </label>
@@ -340,70 +345,70 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                     <div class="flex items-center mb-4">
-                                        <input id="0" type="checkbox" name="pertanyaan-4" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="0" type="checkbox" name="pertanyaan_4[]" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="0" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Jujur
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="1" type="checkbox" name="pertanyaan-4" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="1" type="checkbox" name="pertanyaan_4[]" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Kompeten
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="2" type="checkbox" name="pertanyaan-4" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="2" type="checkbox" name="pertanyaan_4[]" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Visioner
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="3" type="checkbox" name="pertanyaan-4" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="3" type="checkbox" name="pertanyaan_4[]" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Menginspirasi
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="4" type="checkbox" name="pertanyaan-4" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="4" type="checkbox" name="pertanyaan_4[]" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="4" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Cerdas
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="5" type="checkbox" name="pertanyaan-4" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="5" type="checkbox" name="pertanyaan_4[]" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="5" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Adil
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="6" type="checkbox" name="pertanyaan-4" value="6" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="6" type="checkbox" name="pertanyaan_4[]" value="6" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="6" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Berwawasan luas
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="7" type="checkbox" name="pertanyaan-4" value="7" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="7" type="checkbox" name="pertanyaan_4[]" value="7" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="7" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Berani
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="8" type="checkbox" name="pertanyaan-4" value="8" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="8" type="checkbox" name="pertanyaan_4[]" value="8" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="8" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Lugas
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="9" type="checkbox" name="pertanyaan-4" value="9" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="9" type="checkbox" name="pertanyaan_4[]" value="9" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="9" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Imaginatif
                                         </label>
@@ -419,42 +424,42 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                     <div class="flex items-center mb-4">
-                                        <input id="0" type="checkbox" name="pertanyaan-5" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="0" type="checkbox" name="pertanyaan_5[]" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="0" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Membangun karakter lulusan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="1" type="checkbox" name="pertanyaan-5" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="1" type="checkbox" name="pertanyaan_5[]" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Program sekolah dasar dan menengah gratis
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="2" type="checkbox" name="pertanyaan-5" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="2" type="checkbox" name="pertanyaan_5[]" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Peningkatan kesejahteraan guru dan dosen
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="3" type="checkbox" name="pertanyaan-5" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="3" type="checkbox" name="pertanyaan_5[]" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Peningkatan akses pendidikan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="4" type="checkbox" name="pertanyaan-5" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="4" type="checkbox" name="pertanyaan_5[]" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="4" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Peningkatan lapangan kerja yang sesuai<br>kompetensi lulusan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="5" type="checkbox" name="pertanyaan-5" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="5" type="checkbox" name="pertanyaan_5[]" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="5" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Akselerasi lulusan berwirausaha
                                         </label>
@@ -470,63 +475,63 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                     <div class="flex items-center mb-4">
-                                        <input id="0" type="checkbox" name="pertanyaan-6" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="0" type="checkbox" name="pertanyaan_6[]" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="0" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Mengentaskan kemiskinan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="1" type="checkbox" name="pertanyaan-6" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="1" type="checkbox" name="pertanyaan_6[]" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Membangun karakter dan mental generasi muda
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="2" type="checkbox" name="pertanyaan-6" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="2" type="checkbox" name="pertanyaan_6[]" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Memberikan ketentraman
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="3" type="checkbox" name="pertanyaan-6" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="3" type="checkbox" name="pertanyaan_6[]" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Menjaga keutuhan NKRI
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="4" type="checkbox" name="pertanyaan-6" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="4" type="checkbox" name="pertanyaan_6[]" value="4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="4" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Menjunjung tinggi hukum
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="5" type="checkbox" name="pertanyaan-6" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="5" type="checkbox" name="pertanyaan_6[]" value="5" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="5" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Menjunjung tinggi demokrasi
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="6" type="checkbox" name="pertanyaan-6" value="6" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="6" type="checkbox" name="pertanyaan_6[]" value="6" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="6" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Mencerdaskan bangsa
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="7" type="checkbox" name="pertanyaan-6" value="7" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="7" type="checkbox" name="pertanyaan_6[]" value="7" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="7" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Membuka lapangan kerja sesuai kebutuhan
                                         </label>
                                     </div>
 
                                     <div class="flex items-center mb-4">
-                                        <input id="8" type="checkbox" name="pertanyaan-6" value="8" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="8" type="checkbox" name="pertanyaan_6[]" value="8" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="8" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                             Mensejahterakan masyarakat
                                         </label>
@@ -544,21 +549,21 @@
                             <td class="px-6 py-4">
                                 <fieldset>
                                 <div class="flex items-center mb-4">
-                                    <input id="0" type="radio" name="pertanyaan-7" value="0" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                    <input id="0" type="radio" name="pertanyaan_7[]" value="0" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                     <label for="0" class="block ms-2 text-sm font-medium text-slate-950">
                                         1. Anies Baswedan
                                     </label>
                                 </div>
 
                                 <div class="flex items-center mb-4">
-                                    <input id="1" type="radio" name="pertanyaan-7" value="1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                    <input id="1" type="radio" name="pertanyaan_7[]" value="1" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                     <label for="1" class="block ms-2 text-sm font-medium text-slate-950">
                                         2. Prabowo Subianto
                                     </label>
                                 </div>
 
                                 <div class="flex items-center mb-4">
-                                    <input id="2" type="radio" name="pertanyaan-7" value="2" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                                    <input id="2" type="radio" name="pertanyaan_7[]" value="2" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
                                     <label for="2" class="block ms-2 text-sm font-medium text-slate-950">
                                         3. Ganjar Pranowo
                                     </label>
@@ -568,10 +573,12 @@
                         </tr>
                     </tbody>
                 </table>
-                <button type="submit" class="text-[#5669CC] hover:text-white border border-[#5669CC] hover:bg-[#5669CC] focus:ring-4 focus:outline-none focus:ring-[#5669CC] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-[#5669CC] dark:text-[#5669CC] dark:hover:text-white dark:hover:bg-[#5669CC] dark:focus:ring-[#5669CC]">Submit</button>
+                <div class="w-full flex justify-center" >
+                    <button type="submit" class="text-[#5669CC] text-center hover:text-white border border-[#5669CC] hover:bg-[#5669CC] focus:ring-4 focus:outline-none focus:ring-[#5669CC] font-medium rounded-lg text-sm px-5 py-2.5  me-2 mb-2 dark:border-[#5669CC] dark:text-[#5669CC] dark:hover:text-white dark:hover:bg-[#5669CC] dark:focus:ring-[#5669CC]">Submit</button>
+                </div>
             </div>
         </form>
-        <div class="flex flex=row justify-end mt-[10px]">
+        <div class="flex flex-row justify-end mt-[10px]">
             <button type="button" id="home" class="text-[#5669CC] hover:text-white border border-[#5669CC] hover:bg-[#5669CC] focus:ring-4 focus:outline-none focus:ring-[#5669CC] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-[#5669CC] dark:text-[#5669CC] dark:hover:text-white dark:hover:bg-[#5669CC] dark:focus:ring-[#5669CC]"></button>
             <button type="button" id="next" class="text-[#5669CC] hover:text-white border border-[#5669CC] hover:bg-[#5669CC] focus:ring-4 focus:outline-none focus:ring-[#5669CC] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-[#5669CC] dark:text-[#5669CC] dark:hover:text-white dark:hover:bg-[#5669CC] dark:focus:ring-[#5669CC]">Next</button>
         </div>
@@ -581,6 +588,27 @@
 
 @push('script')
     <script>
+        const maxAllowed = {
+           'pertanyaan_1[]' : 2,
+           'pertanyaan_2[]' : 2,
+           'pertanyaan_3[]' : 2,
+           'pertanyaan_4[]' : 2,
+           'pertanyaan_5[]' : 2,
+           'pertanyaan_6[]' : 2,
+           'pertanyaan_7[]' : 2,
+        };
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', function () {
+                const groupName = this.getAttribute('name');
+                const checkedCount = document.querySelectorAll(`input[name="${groupName}"]:checked`).length;
+
+                if (checkedCount > maxAllowed[groupName]) {
+                    this.checked = false;
+                }
+            });
+        });
         const tambahan = `<tr id="profesi" class="bg-white dark:bg-gray-800">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 Profesi
@@ -660,6 +688,8 @@
             url: '{{ route('utility.area.province') }}',
             type: 'GET',
             success: function(response) {
+                $('#list-provinsi').empty()
+                $('#list-provinsi').append('<option class="py-2 text-sm text-gray-700 dark:text-gray-200" value="">Pilih Provinsi</option>')
                 $.each(response, function(key, value) {
                     $('#list-provinsi').append('<option value="'+key+'">'+value+'</option>')
                 })
@@ -679,6 +709,7 @@
                 },
                 success: function(response) {
                     $('#list-kab').empty()
+                    $('#list-kab').append('<option class="py-2 text-sm text-gray-700 dark:text-gray-200" value="">Pilih Kabupaten</option>')
                     $.each(response, function(key, value) {
                         $('#list-kab').append('<option class="py-2 text-sm text-gray-700 dark:text-gray-200" value="'+key+'">'+value+'</option>')
                     })
@@ -709,14 +740,14 @@
             $('#list-pertanyaan').removeClass('hidden');
             $('#biodata').addClass('hidden');
             $('#home').text('Back')
-            $('#next').text('Submit')
+            $('#next').addClass('hidden');
             $('#info').text('Kuisioner')
-            $('#next').attr('type', 'submit')
         })
 
         $('#home').on('click', function() {
             if($('#biodata').hasClass('hidden')) {
                 $('#list-pertanyaan').addClass('hidden');
+                $('#next').removeClass('hidden');
                 $('#biodata').removeClass('hidden');
                 $('#home').text('Home');
                 $('#next').text('Next')

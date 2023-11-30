@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Pertanyaan;
 use App\Models\Responden;
@@ -13,34 +14,29 @@ class RespondenController extends Controller
 
     private Pertanyaan $pertanyaan;
     private Responden $responden;
+    private Answer $answer;
 
-    public function __construct(Pertanyaan $pertanyaan, Responden $responden) {
+    public function __construct(Pertanyaan $pertanyaan, Responden $responden, Answer $answer) {
         $this->pertanyaan = $pertanyaan;
         $this->responden = $responden;
+        $this->answer = $answer;
     }
 
     public function postData(Request $request) {
         try{
-            // $validated = $request->validate([
-            //     "email" => "required",
-            //     "jenis_kelamin" => "required",
-            //     "status" => "required",
-            //     "profesi" => "nullable",
-            //     "pendidikan" => "nullable",
-            //     'provinsi' => "required",
-            //     "kota" => "required",
-            //     "pernyataan-1" => "required",
-            //     "pernyataan-2" => "required",
-            //     "pernyataan-3" => "required",
-            //     "pernyataan-4" => "required",
-            //     "pernyataan-5" => "required",
-            //     "pernyataan-6" => "required",
-            //     "pernyataan-7" => "required",
-            // ]);
+            $pilihan1 = $request->input('pertanyaan_1');
+            $pilihan2 = $request->input('pertanyaan_2');
+            $pilihan3 = $request->input('pertanyaan_3');
+            $pilihan4 = $request->input('pertanyaan_4');
+            $pilihan5 = $request->input('pertanyaan_5');
+            $pilihan6 = $request->input('pertanyaan_6');
+            $pilihan7 = $request->input('pertanyaan_7');
 
-            // dd($request->input('pertanyaan-1'));
-
-            $responden = $this->responden->insert([
+            if($this->responden->where('email', $request->email)->exists()) {
+                return back()->with('error', 'Email sudah terdaftar');
+            }
+            
+            $responden = $this->responden->create([
                 "email" => $request->email,
                 "jenis_kelamin" => $request->jenis_kelamin,
                 "status" => $request->status,
@@ -49,27 +45,69 @@ class RespondenController extends Controller
                 "provinsi" => $request->provinsi,
                 "kota" => $request->kota,
             ]);
-            if($responden) {
-                $data = $this->responden->where('email', $request->email)->first();
 
-                $this->pertanyaan->insert([
-                    "pertanyaan_1" => $request->input('pertanyaan-1'),
-                    "pertanyaan_2" => $request->input('pertanyaan-2'),
-                    "pertanyaan_3" => $request->input('pertanyaan-3'),
-                    "pertanyaan_4" => $request->input('pertanyaan-4'),
-                    "pertanyaan_5" => $request->input('pertanyaan-5'),
-                    "pertanyaan_6" => $request->input('pertanyaan-6'),
-                    "pertanyaan_7" => $request->input('pertanyaan-7'),
-                    "responden_id" => $data->id,
+            foreach($pilihan1 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 1,
+                    "answer" => $pilih
+                ]);
+            }
+            
+            foreach($pilihan2 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 2,
+                    "answer" => $pilih
                 ]);
             }
 
+            foreach($pilihan3 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 3,
+                    "answer" => $pilih
+                ]);
+            }
 
+            foreach($pilihan4 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 4,
+                    "answer" => $pilih
+                ]);
+            }
+
+            foreach($pilihan5 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 5,
+                    "answer" => $pilih
+                ]);
+            }
+
+            foreach($pilihan6 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 6,
+                    "answer" => $pilih
+                ]);
+            }
+
+            foreach($pilihan7 as $pilih) {
+                $this->answer->create([
+                    "responden_id" => $responden->id,
+                    "question_id" => 7,
+                    "answer" => $pilih
+                ]);
+            }
+            
+            
             return redirect('/')->with('success', "Berhasil Mengikuti survey");
         }
         catch(\Exception $e) {
+            dd($e);
             return redirect('/')->with('error', "Gagal Melakukan Survey");
         }
     }
-
 }

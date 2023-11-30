@@ -22,10 +22,10 @@
         <div class="max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-5">
             <div href="#" class="flex items-center">
                 <a href="https://www.pens.ac.id" target="_blank">
-                    <img src="../Property/Logo Pens.png" class="h-12 mr-3" alt="Logo PENS" />
+                    <img src="{{ asset('images/pens.png') }}" class="h-12 mr-3" alt="Logo PENS" />
                 </a>
                 <a href="https://sainsdata.pens.ac.id" target="_blank">
-                    <img src="{{asset('property/Logo-SDT')}}" class="h-[45px] ml-2 " alt="Logo SDT" />
+                    <img src="{{ asset('images/sdt.png') }}" class="h-[45px] ml-2 " alt="Logo SDT" />
                 </a>
             </div>
             <h1 class = "text-4xl ">SDT-PENS DATA CORNER</h1>

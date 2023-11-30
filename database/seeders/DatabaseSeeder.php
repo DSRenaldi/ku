@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        
+        for($i = 1; $i <= 7; $i++) {
+            \App\Models\Pertanyaan::create([
+                'question' => 'pertanyaan_' . $i,
+            ]);
+        }
         $this->call([
             ProvincesSeeder::class,
             CitiesSeeder::class,
