@@ -15,5 +15,7 @@ class Responden extends Model
         'status',
         'provinsi',
         'kota',
+	'profesi',
+	'pendidikan',
     ];
 }
