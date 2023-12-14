@@ -18,6 +18,26 @@
 </head>
 
 <body>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                button: 'Ok',
+            })
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('error') }}',
+                button: 'Ok',
+            })
+        </script>
+    @endif
     <nav class="border-[#5669CC] bg-[#5669CC] w-full">
         <div class="max-w-screen-3xl flex flex-wrap items-center justify-between mx-auto p-5">
             <div href="#" class="flex items-center">

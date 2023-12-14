@@ -23,16 +23,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         
-        for($i = 1; $i <= 7; $i++) {
-            \App\Models\Pertanyaan::create([
-                'question' => 'pertanyaan_' . $i,
-            ]);
-        }
         $this->call([
             ProvincesSeeder::class,
             CitiesSeeder::class,
             DistrictsSeeder::class,
             VillagesSeeder::class,
+            PertanyaanSeeder::class,
+            OptionAnswerSeeder::class,
         ]);
         // $this->call(TPSSeeder::class);
     }

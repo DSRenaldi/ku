@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RespondenController;
 use App\Http\Controllers\Util\IndonesiaAreaController;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,6 @@ Route::prefix('utility')
                 Route::get('/tps', 'getTps')->name('tps');
             });
     });
-
-Route::post('/post', [RespondenController::class, 'postData'])->name('post');
+Route::get('/kuisioner/{id}', [QuestionController::class, 'index'])->name('question');
+Route::post('/responden', [RespondenController::class, 'store'])->name('responden');
+Route::post('/post',[QuestionController::class, 'store'])->name('post');
