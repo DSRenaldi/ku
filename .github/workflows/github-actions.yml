@@ -1,14 +1,36 @@
-name: GitHub Actions
+name: Laravel
+
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
-  pull:
+  laravel-build:
+
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Pull changes
-        run: git pull
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: "8.3"
+      - uses: actions/checkout@v3
+      - name: deploy using ssh
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/stage/api/
+            git pull origin dev
+            git status
+            composer install --optimize-autoloader --no-dev
+            chmod 777 --recursive storage
+            php artisan migrate
+            php artisan key:generate
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan event:cache
+            php artisan route:cache
